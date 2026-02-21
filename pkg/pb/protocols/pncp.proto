@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pncp;
+option go_package = "./pncp";
+
+message PncpRequest {
+  string name = 1;
+}
+
+message PncpResponse {
+  string message = 1;
+}
+
+service PncpService {
+  rpc Pncp(PncpRequest) returns (PncpResponse);
+}
