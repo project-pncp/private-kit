@@ -1,4 +1,4 @@
-module github.com/marco-kit/private-kit
+module github.com/project-pncp/private-kit
 
 go 1.24.4
 
