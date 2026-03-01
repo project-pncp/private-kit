@@ -1,16 +1,53 @@
 syntax = "proto3";
 
 package pncp;
-option go_package = "./pncp";
+option go_package = "github.com/project-pncp/private-kit/pkg/pb/protocols/pncp";
 
-message PncpRequest {
-  string name = 1;
+message OrgaoEntidade {
+  string cnpj = 1;
+  string razao_social = 2;
+  string poder_id = 3;
+  string esfera_id = 4;
 }
 
-message PncpResponse {
-  string message = 1;
+message AvailableLicense {
+  string numero_controle_pncp = 1;
+  OrgaoEntidade orgao_entidade = 2;
+  int32 ano_compra = 3;
+  int32 sequencial_compra = 4;
+  string numero_compra = 5;
+  string processo = 6;
+  int32 modalidade_id = 7;
+  string modalidade_nome = 8;
+  int32 modo_disputa_id = 9;
+  int32 situacao_compra_id = 10;
+  string situacao_compra_nome = 11;
+  string objeto_compra = 12;
+  double valor_total_estimado = 13;
+  string data_publicacao_pncp = 14;
+  string data_abertura_proposta = 15;
+  string data_encerramento_proposta = 16;
+  string codigo_municipio_ibge = 17;
+  string uf = 18;
+}
+
+message PncpAvailableLicenseRequest {
+  string codigo_municipal_ibge = 1;
+  string data_inicial = 2;
+  string data_final = 3;
+  string codigo_modalidade_contratacao = 4;
+  int32 pagina = 5;
+  int32 tamanho_pagina = 6;
+}
+
+message PncpAvailableLicenseResponse {
+  repeated AvailableLicense data = 1;
+  int32 total_registros = 2;
+  int32 total_paginas = 3;
+  int32 pagina = 4;
+  int32 tamanho_pagina = 5;
 }
 
 service PncpService {
-  rpc Pncp(PncpRequest) returns (PncpResponse);
+  rpc Pncp(PncpAvailableLicenseRequest) returns (PncpAvailableLicenseResponse);
 }
