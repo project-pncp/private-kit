@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package pncp;
-option go_package = "github.com/project-pncp/private-kit/pkg/pb/protocols/pncp";
+option go_package = "./";
 
 message OrgaoEntidade {
   string cnpj = 1;

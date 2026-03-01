@@ -4,7 +4,7 @@
 // - protoc             v3.21.12
 // source: pncp.proto
 
-package pncp
+package __
 
 import (
 	context "context"
@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PncpServiceClient interface {
-	Pncp(ctx context.Context, in *PncpRequest, opts ...grpc.CallOption) (*PncpResponse, error)
+	Pncp(ctx context.Context, in *PncpAvailableLicenseRequest, opts ...grpc.CallOption) (*PncpAvailableLicenseResponse, error)
 }
 
 type pncpServiceClient struct {
@@ -37,9 +37,9 @@ func NewPncpServiceClient(cc grpc.ClientConnInterface) PncpServiceClient {
 	return &pncpServiceClient{cc}
 }
 
-func (c *pncpServiceClient) Pncp(ctx context.Context, in *PncpRequest, opts ...grpc.CallOption) (*PncpResponse, error) {
+func (c *pncpServiceClient) Pncp(ctx context.Context, in *PncpAvailableLicenseRequest, opts ...grpc.CallOption) (*PncpAvailableLicenseResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PncpResponse)
+	out := new(PncpAvailableLicenseResponse)
 	err := c.cc.Invoke(ctx, PncpService_Pncp_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (c *pncpServiceClient) Pncp(ctx context.Context, in *PncpRequest, opts ...g
 // All implementations must embed UnimplementedPncpServiceServer
 // for forward compatibility
 type PncpServiceServer interface {
-	Pncp(context.Context, *PncpRequest) (*PncpResponse, error)
+	Pncp(context.Context, *PncpAvailableLicenseRequest) (*PncpAvailableLicenseResponse, error)
 	mustEmbedUnimplementedPncpServiceServer()
 }
 
@@ -59,7 +59,7 @@ type PncpServiceServer interface {
 type UnimplementedPncpServiceServer struct {
 }
 
-func (UnimplementedPncpServiceServer) Pncp(context.Context, *PncpRequest) (*PncpResponse, error) {
+func (UnimplementedPncpServiceServer) Pncp(context.Context, *PncpAvailableLicenseRequest) (*PncpAvailableLicenseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pncp not implemented")
 }
 func (UnimplementedPncpServiceServer) mustEmbedUnimplementedPncpServiceServer() {}
@@ -76,7 +76,7 @@ func RegisterPncpServiceServer(s grpc.ServiceRegistrar, srv PncpServiceServer) {
 }
 
 func _PncpService_Pncp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PncpRequest)
+	in := new(PncpAvailableLicenseRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -88,7 +88,7 @@ func _PncpService_Pncp_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: PncpService_Pncp_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PncpServiceServer).Pncp(ctx, req.(*PncpRequest))
+		return srv.(PncpServiceServer).Pncp(ctx, req.(*PncpAvailableLicenseRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
